@@ -2,30 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Robux & Price Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>RYATEZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #f6f7f9;
+      --bg: #fefaf4;            
       --card: #ffffff;
-      --ink: #1f2937;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --accent: #2e7d32;
-      --accent-dark: #1b5e20;
-      --danger: #c62828;
-      --green: #4CAF50;
-      --green-dark: #2e7d32;
+      --ink: #1e293b;           
+      --muted: #475569;
+      --line: #d6d3d1;
+      --accent: #2563eb;        
+      --accent-dark: #1e40af;
+      --danger: #dc2626;
+      --green: #22c55e;
+      --green-dark: #15803d;
+      --beige: #f5f0e6;
     }
 
-    *{ box-sizing: border-box; }
+    *{ 
+      box-sizing: border-box; 
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-weight: 700; /* all bold */
+    }
+
     body{
       margin: 0;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--ink);
       background: var(--bg);
     }
 
+    /* Top Bar */
     .top-bar{
       max-width: 1200px;
       margin: 0 auto;
@@ -33,18 +39,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: var(--accent);
+      border-bottom: 4px solid var(--accent-dark);
+      border-radius: 0 0 16px 16px;
     }
-    .brand h1{ margin: 0; font-size: 22px; font-weight: 700; }
+    .brand h1{ margin: 0; font-size: 26px; color: #fff; }
+    .caption { font-size: 12px; font-weight: 700; color: #e0e7ff; margin-top: 2px; }
+    .brand { display: flex; flex-direction: column; }
+
     .top-up-btn{
       text-decoration: none;
-      background: var(--accent);
-      color: #fff;
+      background: var(--beige);
+      color: var(--accent-dark);
       padding: 10px 16px;
       border-radius: 10px;
-      font-weight: 600;
-      border: 1px solid var(--accent-dark);
+      border: 2px solid var(--accent-dark);
     }
-    .rule{ border: 0; border-top: 1px solid var(--line); margin: 0; }
 
     .wrap{
       max-width: 1200px;
@@ -58,28 +68,30 @@
 
     .card{
       background: var(--card);
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
       border-radius: 16px;
       overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
     .card-head{
       padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
-      background: #fafafa;
+      border-bottom: 2px solid var(--line);
+      background: var(--beige);
     }
-    .card-title{ margin: 0; font-size: 18px; font-weight: 700; }
+    .card-title{ margin: 0; font-size: 18px; color: var(--accent-dark); }
     .card-body{ padding: 16px; display: grid; gap: 16px; }
 
     .field{ display: grid; gap: 6px; }
     .label-row{ border-bottom: 1px dashed var(--line); padding-bottom: 4px; }
-    .label{ font-size: 14px; font-weight: 600; color: var(--muted); }
+    .label{ font-size: 14px; color: var(--muted); }
 
     .input{
       width: 100%;
       padding: 12px 10px;
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
       border-radius: 12px;
       font-size: 15px;
+      background: #f8fafc;
     }
 
     .suggested{
@@ -91,67 +103,70 @@
       padding: 6px 10px;
       border: none;
       border-radius: 8px;
-      font-weight: 600;
       font-size: 13px;
       cursor: pointer;
       color: #fff;
+      transition: background 0.2s;
     }
-    .btn-light{ background: var(--green); }
-    .btn-dark{ background: var(--green-dark); }
+    .btn-light{ background: var(--accent); }
+    .btn-dark{ background: var(--accent-dark); }
+    .btn-light:hover{ background: #1d4ed8; }
+    .btn-dark:hover{ background: #172554; }
 
-    .result-box{
-      padding: 12px;
-      border: 1px dashed var(--line);
-      border-radius: 12px;
-      background: #fafafa;
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      font-weight: 700;
-    }
-
-    .clear{
-      margin-left: auto;
-      background: #fff;
-      color: var(--danger);
-      border: 1px solid #ef9a9a;
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .price-table{
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .price-table th, .price-table td{ padding: 12px 14px; font-size: 15px; }
-    .price-table thead{ background: #fafafa; }
-    .price-table th{ text-align: left; font-size: 14px; font-weight: 700; color: var(--muted); }
-    .price-table td:last-child{ text-align: right; }
     .fruit-btn{
-      background: var(--green);
+      background: var(--accent);
       color: #fff;
       border: none;
       padding: 6px 10px;
       border-radius: 8px;
       font-size: 13px;
       cursor: pointer;
-      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .fruit-btn:hover{ background: var(--accent-dark); }
+
+    .clear{
+      margin-left: auto;
+      background: #fff;
+      color: var(--danger);
+      border: 2px solid #fecaca;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .clear:hover{ background: #fee2e2; }
+
+    .result-box{
+      padding: 12px;
+      border: 2px dashed var(--line);
+      border-radius: 12px;
+      background: #f9fafb;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      color: var(--accent-dark);
     }
 
-    /* Comparison Box */
+    .price-table{
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .price-table th, .price-table td{ padding: 12px 14px; font-size: 15px; }
+    .price-table thead{ background: var(--beige); }
+    .price-table th{ text-align: left; font-size: 14px; color: var(--muted); }
+    .price-table td:last-child{ text-align: right; }
+
     .compare-box{
       margin-top: 10px;
       padding: 14px;
-      border: 1px solid var(--line);
+      border: 2px solid var(--accent);
       border-radius: 12px;
-      background: #fafafa;
+      background: #e0f2fe;
       font-size: 14px;
     }
     .compare-box strong{ color: var(--accent-dark); }
@@ -160,12 +175,14 @@
 <body>
   <!-- Header -->
   <div class="top-bar">
-    <div class="brand"><h1>Robux & Price Calculator</h1></div>
+    <div class="brand">
+      <h1>RYATEZ</h1>
+      <span class="caption">created by Rosland</span>
+    </div>
     <a href="https://www.eldorado.gg/buy-robux/g/70-0-0" target="_blank" class="top-up-btn">Top Up</a>
   </div>
-  <hr class="rule"/>
 
-  <!-- Main -->
+  <!-- Main Layout -->
   <div class="wrap">
     <!-- Left Column -->
     <div class="left-col">
@@ -273,7 +290,7 @@
           <div class="compare-box">
             <div>Original Price: SGD <strong id="orig">0.00</strong></div>
             <div>Total Price: SGD <strong id="comp-total">0.00</strong></div>
-            <div>Difference (Orig - Total): SGD <strong id="diff">0.00</strong></div>
+            <div>You Save: SGD <strong id="diff">0.00</strong></div>
           </div>
         </div>
       </section>
