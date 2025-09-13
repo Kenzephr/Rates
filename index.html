@@ -273,7 +273,7 @@
           <div class="compare-box">
             <div>Original Price: SGD <strong id="orig">0.00</strong></div>
             <div>Total Price: SGD <strong id="comp-total">0.00</strong></div>
-            <div>Difference: SGD <strong id="diff">0.00</strong></div>
+            <div>Difference (Orig - Total): SGD <strong id="diff">0.00</strong></div>
           </div>
         </div>
       </section>
@@ -281,24 +281,24 @@
   </div>
 
   <script>
-    function formatNumber(num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
     function roundUpTwoDecimals(num) {
       return (Math.ceil(num * 100) / 100).toFixed(2);
     }
+
     function calculateTax() {
       const afterTax = parseFloat(document.getElementById("afterTax").value) || 0;
       const need = Math.ceil(afterTax / 0.7);
-      document.getElementById("need").textContent = formatNumber(need);
+      document.getElementById("need").textContent = need.toLocaleString();
       document.getElementById("quantity").value = need;
       calculateTotal();
     }
     document.getElementById("afterTax").addEventListener("input", calculateTax);
+
     function setAfterTax(value){
       document.getElementById("afterTax").value = value;
       calculateTax();
     }
+
     function calculateTotal(){
       const rawRate = (document.getElementById("rate").value || "").trim();
       let rate = 0;
@@ -316,12 +316,11 @@
     document.getElementById("rate").addEventListener("input", calculateTotal);
     document.getElementById("quantity").addEventListener("input", calculateTotal);
 
-    // Compare against clicked Original price
     function compareOriginal(origPrice){
       const total = parseFloat(document.getElementById("total").textContent) || 0;
       document.getElementById("orig").textContent = origPrice.toFixed(2);
       document.getElementById("comp-total").textContent = total.toFixed(2);
-      document.getElementById("diff").textContent = (total - origPrice).toFixed(2);
+      document.getElementById("diff").textContent = (origPrice - total).toFixed(2);
     }
 
     function clearAll(){
