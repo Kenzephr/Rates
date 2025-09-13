@@ -56,7 +56,6 @@
       align-items: start;
     }
 
-    /* Cards */
     .card{
       background: var(--card);
       border: 1px solid var(--line);
@@ -68,11 +67,7 @@
       border-bottom: 1px solid var(--line);
       background: #fafafa;
     }
-    .card-title{
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-    }
+    .card-title{ margin: 0; font-size: 18px; font-weight: 700; }
     .card-body{ padding: 16px; display: grid; gap: 16px; }
 
     .field{ display: grid; gap: 6px; }
@@ -127,7 +122,6 @@
       cursor: pointer;
     }
 
-    /* Price table */
     .price-table{
       width: 100%;
       border-collapse: collapse;
@@ -136,10 +130,7 @@
       border-radius: 12px;
       overflow: hidden;
     }
-    .price-table th, .price-table td{
-      padding: 12px 14px;
-      font-size: 15px;
-    }
+    .price-table th, .price-table td{ padding: 12px 14px; font-size: 15px; }
     .price-table thead{ background: #fafafa; }
     .price-table th{ text-align: left; font-size: 14px; font-weight: 700; color: var(--muted); }
     .price-table td:last-child{ text-align: right; }
@@ -154,11 +145,16 @@
       font-weight: 600;
     }
 
-    /* Right column layout */
-    .right-col{
-      display: grid;
-      gap: 24px;
+    /* Comparison Box */
+    .compare-box{
+      margin-top: 10px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fafafa;
+      font-size: 14px;
     }
+    .compare-box strong{ color: var(--accent-dark); }
   </style>
 </head>
 <body>
@@ -171,32 +167,51 @@
 
   <!-- Main -->
   <div class="wrap">
-    <!-- Left: Fruit Table -->
-    <div class="card">
-      <header class="card-head"><h2 class="card-title">Fruit Prices</h2></header>
-      <div class="card-body">
-        <table class="price-table">
-          <thead>
-            <tr><th>Fruit</th><th>Price (Robux)</th><th></th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Leopard</td><td>3,000</td><td><button class="fruit-btn" onclick="setAfterTax(3000)">Use</button></td></tr>
-            <tr><td>Yeti</td><td>3,000</td><td><button class="fruit-btn" onclick="setAfterTax(3000)">Use</button></td></tr>
-            <tr><td>Spirit</td><td>2,550</td><td><button class="fruit-btn" onclick="setAfterTax(2550)">Use</button></td></tr>
-            <tr><td>Gas</td><td>2,500</td><td><button class="fruit-btn" onclick="setAfterTax(2500)">Use</button></td></tr>
-            <tr><td>Venom</td><td>2,450</td><td><button class="fruit-btn" onclick="setAfterTax(2450)">Use</button></td></tr>
-            <tr><td>Shadow</td><td>2,425</td><td><button class="fruit-btn" onclick="setAfterTax(2425)">Use</button></td></tr>
-            <tr><td>Gravity</td><td>2,300</td><td><button class="fruit-btn" onclick="setAfterTax(2300)">Use</button></td></tr>
-            <tr><td>Blizzard</td><td>2,250</td><td><button class="fruit-btn" onclick="setAfterTax(2250)">Use</button></td></tr>
-            <tr><td>Pain</td><td>2,200</td><td><button class="fruit-btn" onclick="setAfterTax(2200)">Use</button></td></tr>
-            <tr><td>Lightning</td><td>2,100</td><td><button class="fruit-btn" onclick="setAfterTax(2100)">Use</button></td></tr>
-            <tr><td>Creation</td><td>1,750</td><td><button class="fruit-btn" onclick="setAfterTax(1750)">Use</button></td></tr>
-          </tbody>
-        </table>
+    <!-- Left Column -->
+    <div class="left-col">
+      <!-- Fruit Price Table -->
+      <div class="card">
+        <header class="card-head"><h2 class="card-title">Fruit Prices</h2></header>
+        <div class="card-body">
+          <table class="price-table">
+            <thead><tr><th>Fruit</th><th>Price (Robux)</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>Leopard</td><td>3,000</td><td><button class="fruit-btn" onclick="setAfterTax(3000)">Use</button></td></tr>
+              <tr><td>Yeti</td><td>3,000</td><td><button class="fruit-btn" onclick="setAfterTax(3000)">Use</button></td></tr>
+              <tr><td>Spirit</td><td>2,550</td><td><button class="fruit-btn" onclick="setAfterTax(2550)">Use</button></td></tr>
+              <tr><td>Gas</td><td>2,500</td><td><button class="fruit-btn" onclick="setAfterTax(2500)">Use</button></td></tr>
+              <tr><td>Venom</td><td>2,450</td><td><button class="fruit-btn" onclick="setAfterTax(2450)">Use</button></td></tr>
+              <tr><td>Shadow</td><td>2,425</td><td><button class="fruit-btn" onclick="setAfterTax(2425)">Use</button></td></tr>
+              <tr><td>Gravity</td><td>2,300</td><td><button class="fruit-btn" onclick="setAfterTax(2300)">Use</button></td></tr>
+              <tr><td>Blizzard</td><td>2,250</td><td><button class="fruit-btn" onclick="setAfterTax(2250)">Use</button></td></tr>
+              <tr><td>Pain</td><td>2,200</td><td><button class="fruit-btn" onclick="setAfterTax(2200)">Use</button></td></tr>
+              <tr><td>Lightning</td><td>2,100</td><td><button class="fruit-btn" onclick="setAfterTax(2100)">Use</button></td></tr>
+              <tr><td>Creation</td><td>1,750</td><td><button class="fruit-btn" onclick="setAfterTax(1750)">Use</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Original Robux Price Table -->
+      <div class="card" style="margin-top:20px;">
+        <header class="card-head"><h2 class="card-title">Original Robux Prices</h2></header>
+        <div class="card-body">
+          <table class="price-table">
+            <thead><tr><th>Robux</th><th>Price (SGD)</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>24,000</td><td>288.98</td><td><button class="fruit-btn" onclick="compareOriginal(288.98)">Compare</button></td></tr>
+              <tr><td>11,000</td><td>148.98</td><td><button class="fruit-btn" onclick="compareOriginal(148.98)">Compare</button></td></tr>
+              <tr><td>5,250</td><td>68.98</td><td><button class="fruit-btn" onclick="compareOriginal(68.98)">Compare</button></td></tr>
+              <tr><td>2,000</td><td>28.98</td><td><button class="fruit-btn" onclick="compareOriginal(28.98)">Compare</button></td></tr>
+              <tr><td>1,000</td><td>14.98</td><td><button class="fruit-btn" onclick="compareOriginal(14.98)">Compare</button></td></tr>
+              <tr><td>500</td><td>6.98</td><td><button class="fruit-btn" onclick="compareOriginal(6.98)">Compare</button></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- Right column -->
+    <!-- Right Column -->
     <div class="right-col">
       <!-- Tax Calculator -->
       <section class="card">
@@ -207,7 +222,6 @@
             <input type="number" id="afterTax" class="input" step="0.01" placeholder="e.g., 5000" />
           </div>
 
-          <!-- Suggested buttons -->
           <div class="suggested">
             <button class="btn btn-light" onclick="setAfterTax(1000)">1000</button>
             <button class="btn btn-dark" onclick="setAfterTax(1500)">1500</button>
@@ -236,7 +250,7 @@
         </div>
       </section>
 
-      <!-- Total Price Calculator -->
+      <!-- Total Price Calculator + Comparison -->
       <section class="card">
         <header class="card-head" style="display:flex; align-items:center; justify-content:space-between;">
           <h2 class="card-title">Total Price Calculator</h2>
@@ -253,6 +267,13 @@
           </div>
           <div class="result-box">
             <span>Total Price: SGD <span id="total">0.00</span></span>
+          </div>
+
+          <!-- Comparison Box -->
+          <div class="compare-box">
+            <div>Original Price: SGD <strong id="orig">0.00</strong></div>
+            <div>Total Price: SGD <strong id="comp-total">0.00</strong></div>
+            <div>Difference: SGD <strong id="diff">0.00</strong></div>
           </div>
         </div>
       </section>
@@ -288,16 +309,30 @@
       }
       const quantity = parseFloat(document.getElementById("quantity").value) || 0;
       const total = rate * quantity;
-      document.getElementById("total").textContent = roundUpTwoDecimals(total);
+      const totalRounded = parseFloat(roundUpTwoDecimals(total));
+      document.getElementById("total").textContent = totalRounded.toFixed(2);
+      document.getElementById("comp-total").textContent = totalRounded.toFixed(2);
     }
     document.getElementById("rate").addEventListener("input", calculateTotal);
     document.getElementById("quantity").addEventListener("input", calculateTotal);
+
+    // Compare against clicked Original price
+    function compareOriginal(origPrice){
+      const total = parseFloat(document.getElementById("total").textContent) || 0;
+      document.getElementById("orig").textContent = origPrice.toFixed(2);
+      document.getElementById("comp-total").textContent = total.toFixed(2);
+      document.getElementById("diff").textContent = (total - origPrice).toFixed(2);
+    }
+
     function clearAll(){
       document.getElementById("afterTax").value = "";
       document.getElementById("need").textContent = "0";
       document.getElementById("rate").value = "";
       document.getElementById("quantity").value = "";
       document.getElementById("total").textContent = "0.00";
+      document.getElementById("orig").textContent = "0.00";
+      document.getElementById("comp-total").textContent = "0.00";
+      document.getElementById("diff").textContent = "0.00";
     }
   </script>
 </body>
