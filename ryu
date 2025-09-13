@@ -27,7 +27,6 @@
       background: var(--bg);
     }
 
-    /* Top region */
     .top-bar{
       max-width: 1200px;
       margin: 0 auto;
@@ -58,7 +57,6 @@
       margin: 0;
     }
 
-    /* Main area */
     .wrap{
       max-width: 1200px;
       margin: 0 auto;
@@ -177,6 +175,42 @@
       font-size: 13px;
     }
 
+    /* Price table */
+    .price-table{
+      margin: 50px auto 0;
+      width: 80%;
+      max-width: 700px;
+      border-collapse: collapse;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .price-table th, .price-table td{
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 15px;
+    }
+    .price-table thead{
+      background: #fafafa;
+      border-bottom: 1px solid var(--line);
+    }
+    .price-table th{
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .price-table tbody tr:nth-child(even){
+      background: #f9fafb;
+    }
+    .price-table td:last-child{
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+
     @media (max-width: 980px){
       .grid{ grid-template-columns: 1fr; }
       .vline{ display: none; }
@@ -209,7 +243,6 @@
             <input type="number" id="afterTax" class="input" step="0.01" placeholder="e.g., 5000" />
           </div>
 
-          <!-- Suggested buttons -->
           <div class="suggested">
             <button class="btn btn-light" onclick="setAfterTax(1000)">1000</button>
             <button class="btn btn-dark" onclick="setAfterTax(1500)">1500</button>
@@ -272,6 +305,29 @@
         </div>
       </section>
     </div>
+
+    <!-- Price Table -->
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Fruit</th>
+          <th>Price (Robux)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Leopard</td><td>3,000</td></tr>
+        <tr><td>Yeti</td><td>3,000</td></tr>
+        <tr><td>Spirit</td><td>2,550</td></tr>
+        <tr><td>Gas</td><td>2,500</td></tr>
+        <tr><td>Venom</td><td>2,450</td></tr>
+        <tr><td>Shadow</td><td>2,425</td></tr>
+        <tr><td>Gravity</td><td>2,300</td></tr>
+        <tr><td>Blizzard</td><td>2,250</td></tr>
+        <tr><td>Pain</td><td>2,200</td></tr>
+        <tr><td>Lightning</td><td>2,100</td></tr>
+        <tr><td>Creation</td><td>1,750</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <script>
