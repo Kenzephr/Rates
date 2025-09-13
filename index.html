@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Total Price Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f2f2f2;
+    }
+    .calculator {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px; /* fillet */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+    .calculator label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    .input-group {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+    .calculator input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px; /* fillet */
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    .calculator button {
+      margin-left: 8px;
+      padding: 8px 12px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 8px; /* fillet */
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .calculator button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <label for="rate">Rate per Unit:</label>
+    <div class="input-group">
+      <input type="number" id="rate" step="0.01" placeholder="Enter rate">
+    </div>
+
+    <label for="quantity">Quantity:</label>
+    <div class="input-group">
+      <input type="number" id="quantity" step="1" placeholder="Enter quantity">
+      <button onclick="calculateTotal()">Enter</button>
+    </div>
+
+    <div class="result">Total Price: $<span id="total">0.00</span></div>
+  </div>
+
+  <script>
+    function calculateTotal() {
+      const rate = parseFloat(document.getElementById("rate").value) || 0;
+      const quantity = parseFloat(document.getElementById("quantity").value) || 0;
+      const total = rate * quantity;
+      document.getElementById("total").textContent = total.toFixed(2);
+    }
+  </script>
+</body>
+</html>
