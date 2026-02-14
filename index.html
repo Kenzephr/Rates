@@ -50,7 +50,6 @@
 
     #yesBtn{ background:#000; color:#fff; }
 
-    /* No starts normal */
     #noBtn{ position: static; }
 
     .message{
@@ -59,14 +58,13 @@
       display:none;
     }
 
-    /* ---- Fireworks canvas ---- */
     #fwCanvas{
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 1; /* behind panel (panel is z-index 2) */
+      z-index: 1;
       display: none;
     }
   </style>
@@ -75,6 +73,9 @@
 
   <!-- Fireworks overlay -->
   <canvas id="fwCanvas"></canvas>
+
+  <!-- Audio (put song.mp3 in the SAME folder as this HTML file) -->
+  <audio id="loveSong" src="song.mp3" preload="auto"></audio>
 
   <div class="panel" id="panel">
     <h1 id="titleText">Will you be my valentine 💘</h1>
@@ -92,6 +93,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const msg = document.getElementById("msg");
     const titleText = document.getElementById("titleText");
+    const loveSong = document.getElementById("loveSong");
 
     // ---- Fireworks setup ----
     const canvas = document.getElementById("fwCanvas");
@@ -123,7 +125,6 @@
           size: rand(1.5, 3.5),
           gravity: 0.06,
           drag: 0.985,
-          // random bright colour
           hue: rand(0, 360)
         });
       }
@@ -132,7 +133,6 @@
     function animateFireworks(){
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      // fade trail
       ctx.fillStyle = "rgba(255,255,255,0.15)";
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -146,7 +146,6 @@
         p.y += p.vy;
         p.life -= 1;
 
-        // draw
         ctx.beginPath();
         ctx.fillStyle = `hsla(${p.hue}, 95%, 55%, ${Math.max(p.life/70, 0)})`;
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -155,7 +154,6 @@
         if(p.life <= 0) particles.splice(i, 1);
       }
 
-      // keep spawning bursts for a short duration
       const now = performance.now();
       if(now < fireworksEndAt){
         if(Math.random() < 0.20){
@@ -163,7 +161,6 @@
         }
       }
 
-      // stop when time is up AND particles finished
       if(now >= fireworksEndAt && particles.length === 0){
         cancelAnimationFrame(animId);
         animId = null;
@@ -179,7 +176,6 @@
       canvas.style.display = "block";
       fireworksEndAt = performance.now() + durationMs;
 
-      // first big burst in the middle top-ish
       spawnFireworkBurst(window.innerWidth * 0.5, window.innerHeight * 0.35);
       spawnFireworkBurst(window.innerWidth * 0.3, window.innerHeight * 0.45);
       spawnFireworkBurst(window.innerWidth * 0.7, window.innerHeight * 0.45);
@@ -215,16 +211,26 @@
 
     noBtn.addEventListener("click", moveNoButtonAnywhere);
 
-    // ---- Yes click (show message + fireworks) ----
-    yesBtn.addEventListener("click", () => {
+    // ---- Yes click (show message + fireworks + song) ----
+    yesBtn.addEventListener("click", async () => {
       msg.style.display = "block";
       titleText.textContent = "NYCKE💘";
 
       noBtn.style.display = "none";
       yesBtn.disabled = true;
 
-      // Fireworks appear when Yes is clicked
       startFireworks(3000);
+
+      // Play the song when Yes is clicked
+      // (Browser allows audio because it's triggered by a user click)
+      try {
+        loveSong.currentTime = 0;
+        loveSong.volume = 0.8;
+        await loveSong.play();
+      } catch (e) {
+        // If autoplay is blocked for any reason, you can still press play via controls
+        console.log("Audio couldn't play automatically:", e);
+      }
     });
   </script>
 </body>
